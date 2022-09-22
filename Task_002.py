@@ -9,7 +9,7 @@ b) Подумайте как наделить бота ""интеллектом"
 from random import randint
 
 
-def input_num_of_candies(user_name):
+def input_num_of_candies(user_name: str):
     num_candies = int(
         input(f"{user_name}, введите количество конфет, которое возьмете от 1 до 28: "))
     while num_candies < 1 or num_candies > 28:
@@ -25,7 +25,9 @@ def p_print(user_name, k, counter, value):
 
 player1 = 'Player 1'
 player2 = 'Player 2'
+
 value = int(input("Введите количество конфет на столе: "))
+
 choice_first_step = randint(0, 2)
 if choice_first_step:
     print(f"Первый ходит {player1}")
