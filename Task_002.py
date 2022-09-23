@@ -23,8 +23,55 @@ def p_print(user_name, k, counter, value):
         f"Ходил {user_name}, он взял {k}, теперь у него {counter}. Осталось на столе {value} конфет.")
 
 
-player1 = 'Player 1'
-player2 = 'Player 2'
+def player_vs_player (value: int, choice_first_step, player1, player2):
+    #player1 = 'Player 1'
+    #player2 = 'Player 2'
+    count_player1 = 0
+    count_player2 = 0
+    while value > 28:
+        if choice_first_step:
+            num_of_candies = input_num_of_candies(player1)
+            count_player1 += num_of_candies
+            value -= num_of_candies
+            choice_first_step = False
+            p_print(player1, num_of_candies, count_player1, value)
+        else:
+            num_of_candies = input_num_of_candies(player2)
+            count_player2 += num_of_candies
+            value -= num_of_candies
+            choice_first_step = True
+            p_print(player2, num_of_candies, count_player2, value)
+    return choice_first_step
+
+
+def player_vs_bot (value: int, choice_first_step, player1, player2):
+    #player1 = 'Player 1'
+    #player2 = 'Bot'
+    count_player1 = 0
+    count_player2 = 0
+    while value > 28:
+        if choice_first_step:
+            num_of_candies = input_num_of_candies(player1)
+            count_player1 += num_of_candies
+            value -= num_of_candies
+            choice_first_step = False
+            p_print(player1, num_of_candies, count_player1, value)
+        else:
+            num_of_candies = randint(1,29)
+            count_player2 += num_of_candies
+            value -= num_of_candies
+            choice_first_step = True
+            p_print(player2, num_of_candies, count_player2, value)
+    return
+
+n= int(input('1 - против бота; 2 - против человека --> '))
+
+if n==1:
+    player1 = 'Player 1'
+    player2 = 'Bot'
+else:
+    player1 = 'Player 1'
+    player2 = 'Player 2'
 
 value = int(input("Введите количество конфет на столе: "))
 
@@ -34,22 +81,10 @@ if choice_first_step:
 else:
     print(f"Первый ходит {player2}")
 
-count_player1 = 0
-count_player2 = 0
-
-while value > 28:
-    if choice_first_step:
-        num_of_candies = input_num_of_candies(player1)
-        count_player1 += num_of_candies
-        value -= num_of_candies
-        choice_first_step = False
-        p_print(player1, num_of_candies, count_player1, value)
-    else:
-        num_of_candies = input_num_of_candies(player2)
-        count_player2 += num_of_candies
-        value -= num_of_candies
-        choice_first_step = True
-        p_print(player2, num_of_candies, count_player2, value)
+if n == 1:
+    player_vs_bot(value, choice_first_step, player1, player2)
+else:
+    player_vs_player(value, choice_first_step, player1, player2)
 
 if choice_first_step:
     print(f"Выиграл {player1}")
